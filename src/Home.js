@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 import apiKey from "./config";
+import { Link } from "react-router-dom";
 
 class Home extends Component{
     constructor() {
@@ -27,10 +28,13 @@ class Home extends Component{
         const movieGrid = this.state.movieList.map((x, index) => {
             return (
                 <div className="col s3" key={index}>
-                    <img src={`${imageUrl}${x.poster_path}`} alt={x.title} />
+                    <Link to={`/movie/${x.id}`}>
+                        <img src={`${imageUrl}${x.poster_path}`} alt={x.title} />
+                    </Link>
                 </div>
             )
         })
+
         return(
             <div className="row">
                 {movieGrid}
