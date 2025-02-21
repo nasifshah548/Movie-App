@@ -1,38 +1,89 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #121212;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Home Page Background */
+.home-page {
+  background-color: #121212;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 100vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Movie Grid */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 240px); /* Exactly 5 cards per row */
+  gap: 20px; /* Fixed spacing between cards */
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Movie Card */
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(30, 30, 30, 0.9);
+  border-radius: 10px;
+  width: 240px; /* Fixed width */
+  height: 360px; /* Fixed height */
+  border: 4px solid purple;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Movie Poster */
+.movie-poster {
+  width: 100%;
+  height: 75%; /* Fixed height */
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Movie Title */
+.movie-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* Responsive Fix */
+@media (max-width: 1300px) {
+  .movie-grid {
+    grid-template-columns: repeat(4, 240px); /* 4 cards per row */
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 1000px) {
+  .movie-grid {
+    grid-template-columns: repeat(3, 240px); /* 3 cards per row */
+  }
+}
+
+@media (max-width: 750px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, 240px); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 500px) {
+  .movie-grid {
+    grid-template-columns: repeat(1, 240px); /* 1 card per row */
   }
 }

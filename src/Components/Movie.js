@@ -1,55 +1,66 @@
 import React, { Component } from "react";
 import { useParams } from "react-router-dom";
-import apiKey from "./config";
+import apiKey from "../config";
 import axios from "axios";
+import { Container, Row, Col, Card, Badge, Spinner } from "react-bootstrap";
 
 class Movie extends Component {
-    constructor() {
-        super();
-        this.state = {
-            movie: {}
-        }
+  constructor() {
+    super();
+    this.state = {
+      movie: {},
+      loading: true,
+    };
+  }
+
+  componentDidMount() {
+    let { movieId } = this.props.params;
+    const singleMovieUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
+    axios.get(singleMovieUrl).then((response) => {
+      this.setState({
+        movie: response.data,
+        loading: false,
+      });
+    });
+  }
+
+  render() {
+    const { movie, loading } = this.state;
+    const imageUrl = `http://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+    if (loading) {
+      return (
+        <Container className="text-center mt-5">
+          <Spinner animation="border" variant="primary" />
+        </Container>
+      );
     }
 
-    componentDidMount() {
-        let { movieId } = this.props.params;  // Getting the movieId from the router
-        const singleMovieUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
-        axios.get(singleMovieUrl).then((response) => {
-            console.log(response.data);
-            this.setState({
-                movie: response.data,
-            })
-        })
-    }
-
-    render() {
-
-        if(this.state.movie.title === undefined) {
-            return (
-                <h1>Loading...</h1>
-            )
-        }
-
-        const movie = this.state.movie;
-        const imageUrl = `http://image.tmdb.org/t/p/w300${movie.poster_path}`;
-        
-        return (
-            <div>
-                <img src={imageUrl} alt={movie.title} />
-                <p><strong>Title: {movie.title}</strong></p>
-                <p>Budget: {movie.budget}</p>
-                <p>Tagline: {movie.tagline}</p>
-                <p>Overview: {movie.overview}</p>
-                <p>Release Date: {movie.release_date}</p>
-            </div>
-        );
-    }
+    return (
+      <Container>
+        <Row className="mt-4">
+          <Col md={4}>
+            <Card className="shadow-lg">
+              <Card.Img variant="top" src={imageUrl} alt={movie.title} />
+            </Card>
+          </Col>
+          <Col md={8}>
+            <h2>{movie.title} <Badge bg="info">{movie.vote_average}/10</Badge></h2>
+            <p><strong>Tagline:</strong> {movie.tagline}</p>
+            <p><strong>Overview:</strong> {movie.overview}</p>
+            <p><strong>Release Date:</strong> {movie.release_date}</p>
+            <p><strong>Genres:</strong> {movie.genres?.map(g => g.name).join(", ")}</p>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
 }
 
-// Wrap with a higher-order component to access params
+// Wrapper to pass URL params
 function MovieWrapper(props) {
-    let params = useParams();
-    return <Movie {...props} params={params} />;
+  let params = useParams();
+  return <Movie {...props} params={params} />;
 }
 
 export default MovieWrapper;
