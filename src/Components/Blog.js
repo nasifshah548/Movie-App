@@ -81,12 +81,12 @@ class Blog extends Component {
         </Form>
 
         <h3 className="mt-5">Movie Blogs</h3>
-        {blogs.map((blog, index) => (
+        {blogs.map((x, index) => (
           <Card key={index} className="mb-3">
             <Card.Body>
-              <Card.Title>{blog.title}</Card.Title>
-              <Card.Text>{blog.content}</Card.Text>
-              <Card.Footer className="text-muted">{blog.timestamp}</Card.Footer>
+              <Card.Title>{x.title}</Card.Title>
+              <Card.Text>{x.content}</Card.Text>
+              <Card.Footer className="text-muted">{x.timestamp}</Card.Footer>
               <Button variant="warning" className="me-2" onClick={() => this.handleEdit(index)}>
                 Edit
               </Button>
