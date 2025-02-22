@@ -1,4 +1,4 @@
-/* Global Styles */
+/* =================== GLOBAL STYLES =================== */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -6,7 +6,7 @@ body {
   color: white;
 }
 
-/* Home Page Background */
+/* =================== HOME PAGE BACKGROUND =================== */
 .home-page {
   background-color: #121212;
   display: flex;
@@ -16,7 +16,7 @@ body {
   min-height: 100vh;
 }
 
-/* Movie Grid */
+/* =================== MOVIE GRID =================== */
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(5, 240px); /* Exactly 5 cards per row */
@@ -25,7 +25,7 @@ body {
   padding: 20px;
 }
 
-/* Movie Card */
+/* =================== MOVIE CARD =================== */
 .movie-card {
   display: flex;
   flex-direction: column;
@@ -63,7 +63,79 @@ body {
   text-align: center;
 }
 
-/* Responsive Fix */
+/* =================== NEWS SECTION =================== */
+.news-container {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+
+/* News Grid Layout - 3 cards per row */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* News Card */
+.news-card {
+  background-color: rgba(30, 30, 30, 0.9);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  border: 3px solid #007bff;
+}
+
+.news-card:hover {
+  transform: scale(1.03);
+}
+
+/* News Image */
+.news-card-img {
+  width: 100%;
+  height: 180px; /* Adjusted for better fit */
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+/* News Content */
+.news-content {
+  padding: 15px;
+}
+
+.news-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.news-description {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+/* Read More Button */
+.news-button {
+  background-color: #007bff;
+  border: none;
+  font-weight: bold;
+  padding: 8px 15px;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.news-button:hover {
+  background-color: #0056b3;
+}
+
+/* =================== RESPONSIVENESS =================== */
 @media (max-width: 1300px) {
   .movie-grid {
     grid-template-columns: repeat(4, 240px); /* 4 cards per row */
@@ -85,5 +157,18 @@ body {
 @media (max-width: 500px) {
   .movie-grid {
     grid-template-columns: repeat(1, 240px); /* 1 card per row */
+  }
+}
+
+/* Responsive News Layout */
+@media (max-width: 992px) {
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 768px) {
+  .news-grid {
+    grid-template-columns: repeat(1, 1fr); /* 1 card per row */
   }
 }

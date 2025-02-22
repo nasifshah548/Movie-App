@@ -3,7 +3,7 @@ import axios from "axios";
 import apiKey from "../config";
 import { Link } from "react-router-dom";
 import { Card, Container, Row, Col, Spinner } from "react-bootstrap";
-import "../App.css"; // Ensure the CSS file is imported
+import "../App.css"; 
 
 class Home extends Component {
   constructor() {
@@ -38,6 +38,14 @@ class Home extends Component {
 
     return (
       <Container>
+        {/* Title Section with Icon */}
+        <div className="text-center my-4">
+          <h1 className="title">
+            <i className="fas fa-film"></i> Cineplex Latests: Popular Popcorn Picks
+          </h1>
+        </div>
+
+        {/* Movie Cards */}
         <Row className="movie-grid">
           {movieList.map((x, index) => (
             <Col key={index} className="d-flex justify-content-center">
