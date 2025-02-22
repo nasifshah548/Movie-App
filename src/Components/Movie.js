@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { useParams } from "react-router-dom";
-import apiKey from "../config";
+import { movieApiKey } from "../config";
 import axios from "axios";
 import { Container, Row, Col, Card, Badge, Spinner } from "react-bootstrap";
 
@@ -15,7 +15,7 @@ class Movie extends Component {
 
   componentDidMount() {
     let { movieId } = this.props.params;
-    const singleMovieUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
+    const singleMovieUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${movieApiKey}`;
     axios.get(singleMovieUrl).then((response) => {
       this.setState({
         movie: response.data,

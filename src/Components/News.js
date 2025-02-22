@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Container, Card, Button, Spinner } from "react-bootstrap";
+import { newsApiKey } from "../config";
 import "../App.css"; 
 
 class News extends Component {
@@ -13,9 +14,7 @@ class News extends Component {
   }
 
   componentDidMount() {
-    const newsApiKey = "63a356986c8e1fc58836b2a28d5aa9a5"; 
     const newsUrl = `https://gnews.io/api/v4/search?q=Hollywood&lang=en&country=us&max=9&apikey=${newsApiKey}`;
-
     axios.get(newsUrl).then((response) => {
         this.setState({
           newsList: response.data.articles,

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import apiKey from "../config";
+import { movieApiKey } from "../config";
 import { Link } from "react-router-dom";
 import { Card, Container, Row, Col, Spinner } from "react-bootstrap";
 import "../App.css"; 
@@ -15,7 +15,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const nowPlayingUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}`;
+    const nowPlayingUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${movieApiKey}`;
     axios.get(nowPlayingUrl).then((response) => {
       this.setState({
         movieList: response.data.results,
