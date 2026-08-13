@@ -24,13 +24,24 @@ class Blog extends Component {
     const formattedDate = now.toLocaleString();
 
     if (editingIndex !== null) {
-      // Editing existing blog
       const updatedBlogs = [...blogs];
-      updatedBlogs[editingIndex] = { title, content, timestamp: `Edited at ${formattedDate}` };
-      this.setState({ blogs: updatedBlogs, title: "", content: "", editingIndex: null });
+      updatedBlogs[editingIndex] = {
+        title,
+        content,
+        timestamp: `Edited at ${formattedDate}`,
+      };
+      this.setState({
+        blogs: updatedBlogs,
+        title: "",
+        content: "",
+        editingIndex: null,
+      });
     } else {
-      // Adding a new blog
-      const newBlog = { title, content, timestamp: `Published at ${formattedDate}` };
+      const newBlog = {
+        title,
+        content,
+        timestamp: `Published at ${formattedDate}`,
+      };
       this.setState({ blogs: [newBlog, ...blogs], title: "", content: "" });
     }
   };
@@ -49,50 +60,78 @@ class Blog extends Component {
     const { blogs, title, content, editingIndex } = this.state;
 
     return (
-      <Container className="mt-4">
-        <h2>Write a Movie Blog</h2>
-        <Form>
-          <Form.Group className="mb-3">
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              type="text"
-              name="title"
-              value={title}
-              onChange={this.handleInputChange}
-              placeholder="Enter blog title"
-            />
-          </Form.Group>
+      <Container className="py-4" style={{ maxWidth: "800px" }}>
+        <div className="page-header text-start mb-4">
+          <h2 className="page-title fs-3">Community Movie Blog</h2>
+          <p className="page-subtitle">
+            Share reviews, theories, and cinema thoughts
+          </p>
+        </div>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Content</Form.Label>
-            <Form.Control
-              as="textarea"
-              name="content"
-              value={content}
-              onChange={this.handleInputChange}
-              rows={4}
-              placeholder="Write your blog..."
-            />
-          </Form.Group>
+        <Card className="blog-form-card mb-5 p-3">
+          <Card.Body>
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Label className="fw-medium">Blog Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="title"
+                  value={title}
+                  onChange={this.handleInputChange}
+                  placeholder="e.g. Why Dune Part 2 is a masterpiece"
+                  className="form-control-dark"
+                />
+              </Form.Group>
 
-          <Button variant="success" onClick={this.handlePublish}>
-            {editingIndex !== null ? "Update" : "Publish"}
-          </Button>
-        </Form>
+              <Form.Group className="mb-3">
+                <Form.Label className="fw-medium">Content</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  name="content"
+                  value={content}
+                  onChange={this.handleInputChange}
+                  rows={4}
+                  placeholder="Write your review or article here..."
+                  className="form-control-dark"
+                />
+              </Form.Group>
 
-        <h3 className="mt-5">Movie Blogs</h3>
+              <Button
+                variant="danger"
+                className="px-4 fw-bold"
+                onClick={this.handlePublish}
+              >
+                {editingIndex !== null ? "Update Post" : "Publish Article"}
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
+
         {blogs.map((x, index) => (
-          <Card key={index} className="mb-3">
+          <Card key={index} className="blog-post-card mb-3">
             <Card.Body>
-              <Card.Title>{x.title}</Card.Title>
-              <Card.Text>{x.content}</Card.Text>
-              <Card.Footer className="text-muted">{x.timestamp}</Card.Footer>
-              <Button variant="warning" className="me-2" onClick={() => this.handleEdit(index)}>
-                Edit
-              </Button>
-              <Button variant="danger" onClick={() => this.handleDelete(index)}>
-                Delete
-              </Button>
+              <Card.Title className="fw-bold">{x.title}</Card.Title>
+              <Card.Text className="text-light">{x.content}</Card.Text>
+              <div className="d-flex justify-content-between align-items-center mt-3 pt-2 border-top border-secondary">
+                <small className="text-muted">{x.timestamp}</small>
+                <div>
+                  <Button
+                    variant="outline-warning"
+                    size="sm"
+                    className="me-2"
+                    onClick={() => this.handleEdit(index)}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="outline-danger"
+                    size="sm"
+                    onClick={() => this.handleDelete(index)}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </div>
             </Card.Body>
           </Card>
         ))}

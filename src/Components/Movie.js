@@ -1,69 +1,83 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { movieApiKey } from "../config";
 import axios from "axios";
-import { Container, Row, Col, Card, Badge, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Badge, Spinner } from "react-bootstrap";
 
-class Movie extends Component {
-  constructor() {
-    super();
-    this.state = {
-      movie: {},
-      loading: true,
-    };
-  }
+const Movie = () => {
+  const { movieId } = useParams(); // Direct hook access!
+  const [movie, setMovie] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  componentDidMount() {
-    let { movieId } = this.props.params;
+  useEffect(() => {
     const singleMovieUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${movieApiKey}`;
     axios.get(singleMovieUrl).then((response) => {
-      this.setState({
-        movie: response.data,
-        loading: false,
-      });
+      setMovie(response.data);
+      setLoading(false);
     });
-  }
+  }, [movieId]);
 
-  render() {
-    const { movie, loading } = this.state;
-    const imageUrl = `http://image.tmdb.org/t/p/w500${movie.poster_path}`;
-
-    if (loading) {
-      return (
-        <Container className="text-center mt-5">
-          <Spinner animation="border" variant="primary" />
-        </Container>
-      );
-    }
-
+  if (loading) {
     return (
-      <Container>
-        <Row className="mt-4">
-          <Col md={4}>
-            <Card className="shadow-lg">
-              <Card.Img variant="top" src={imageUrl} alt={movie.title} />
-            </Card>
-          </Col>
-          <Col md={8}>
-            <h2>{movie.title} <Badge bg="info">{movie.vote_average}/10</Badge></h2>
-            <p><strong>Tagline:</strong> {movie.tagline}</p>
-            <p><strong>Overview:</strong> {movie.overview}</p>
-            <p><strong>Release Date:</strong> {movie.release_date}</p>
-            <p><strong>Genres:</strong> {movie.genres?.map(g => g.name).join(", ")}</p>
-          </Col>
-        </Row>
+      <Container className="text-center mt-5 pt-5">
+        <Spinner animation="border" variant="danger" />
       </Container>
     );
   }
-}
 
-// Wrapper to pass URL params
-function MovieWrapper(props) {
-  let params = useParams();
-  return <Movie {...props} params={params} />;
-}
+  const imageUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
-export default MovieWrapper;
+  return (
+    <Container className="mt-4 mb-5">
+      <div className="movie-detail-card">
+        <Row className="align-items-center">
+          <Col md={4} className="mb-4 mb-md-0">
+            <img
+              src={imageUrl}
+              alt={movie.title}
+              className="movie-detail-poster img-fluid"
+            />
+          </Col>
+          <Col md={8}>
+            <h1 className="fw-bold mb-2">
+              {movie.title}{" "}
+              <Badge className="rating-badge ms-2">
+                ★ {movie.vote_average?.toFixed(1)}
+              </Badge>
+            </h1>
+            {movie.tagline && (
+              <p className="text-muted fst-italic mb-3">"{movie.tagline}"</p>
+            )}
+
+            <div className="mb-4">
+              <h6 className="text-uppercase text-danger fw-bold fs-7">
+                Overview
+              </h6>
+              <p className="lh-base" style={{ color: "#d1d5db" }}>
+                {movie.overview}
+              </p>
+            </div>
+
+            <Row className="g-3">
+              <Col sm={6}>
+                <span className="text-muted d-block small">Release Date</span>
+                <span className="fw-medium">{movie.release_date}</span>
+              </Col>
+              <Col sm={6}>
+                <span className="text-muted d-block small">Genres</span>
+                <span className="fw-medium">
+                  {movie.genres?.map((g) => g.name).join(", ")}
+                </span>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </div>
+    </Container>
+  );
+};
+
+export default Movie;
 
 /*
 
