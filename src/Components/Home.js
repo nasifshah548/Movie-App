@@ -196,7 +196,7 @@ const Home = () => {
                     {/* Movie Title Body */}
                     <Card.Body className="movie-card-body p-3">
                       <Card.Title className="movie-title-text text-truncate fs-6 mb-1">
-                        {movie.title}
+                        <strong>{movie.title}</strong>
                       </Card.Title>
                       <Card.Text className="small text-muted mb-0">
                         {movie.release_date
