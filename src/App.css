@@ -130,26 +130,32 @@ body {
 }
 
 /* =================== MOVIE DETAIL PAGE =================== */
-.movie-detail-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 24px;
-  backdrop-filter: blur(10px);
+.movie-details-poster {
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+  transform: translateY(-10px);
 }
 
-.movie-detail-poster {
-  border-radius: 12px;
-  width: 100%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(229, 9, 20, 0.5) rgba(255, 255, 255, 0.05);
 }
 
-.rating-badge {
-  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
-  font-size: 0.9rem !important;
-  padding: 6px 12px !important;
-  border-radius: 20px !important;
-  vertical-align: middle;
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #e50914;
+  border-radius: 4px;
+}
+
+.fs-7 {
+  font-size: 0.825rem;
+}
+
+.fs-8 {
+  font-size: 0.75rem;
 }
 
 /* =================== NEWS SECTION =================== */
@@ -470,4 +476,18 @@ body.bg-dark .page-title,
 body.bg-dark .page-subtitle,
 .dark-mode .page-subtitle {
   color: #a0aec0 !important;
+}
+
+/* Movie Details Overview Text */
+.movie-overview-text {
+  color: #1a202c !important; /* Deep black/slate for crisp contrast */
+  background-color: #ffffff; /* Clean white background card */
+  padding: 1.25rem;
+  border-radius: 8px;
+  font-family:
+    "Aptos",
+    "Segoe UI",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
