@@ -335,9 +335,9 @@ const Movie = () => {
                           className="img-fluid"
                         />
                       </div>
-                      <Card.Body className="p-3">
+                      <Card.Body className="p-3 text-center">
                         <Card.Title className="fs-6 text-truncate mb-1 text-white">
-                          {simMovie.title}
+                          <strong>{simMovie.title}</strong>
                         </Card.Title>
                         <Card.Text className="small text-muted mb-0">
                           {simMovie.release_date
