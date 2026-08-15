@@ -183,7 +183,7 @@ const Movie = () => {
                 }}
               >
                 <i className="fas fa-align-left text-danger me-2 fs-4"></i>{" "}
-                Movie Overview
+                Overview
               </h3>
               <p
                 className="movie-overview-text fs-5 lh-lg shadow-sm"
