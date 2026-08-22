@@ -12,7 +12,12 @@
 
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
+  font-family:
+    "Aptos",
+    "Segoe UI",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   background-color: var(--bg-main);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
@@ -46,22 +51,36 @@ body {
   color: var(--text-primary) !important;
 }
 
-/* Hero Title Header */
+/* ================= PAGE HEADER STYLING ================= */
 .page-header {
-  text-align: center;
-  margin: 35px 0 25px 0;
+  margin-top: 0.5rem !important; /* Minimizes top gap */
+  margin-bottom: 1.5rem !important; /* Tightens space before content */
 }
 
 .page-title {
+  color: #1a202c !important; /* Dark slate text for high contrast on light areas */
   font-weight: 800;
   font-size: 2.2rem;
   letter-spacing: -0.5px;
-  color: var(--text-primary);
+  font-family: "Aptos", "Segoe UI", sans-serif;
 }
 
 .page-subtitle {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
+  color: #4a5568 !important; /* Muted slate for clear subtext contrast */
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  font-family: "Aptos", "Segoe UI", sans-serif;
+}
+
+body.bg-dark .page-title,
+.dark-mode .page-title {
+  color: #ffffff !important;
+}
+
+body.bg-dark .page-subtitle,
+.dark-mode .page-subtitle {
+  color: #a0aec0 !important;
 }
 
 /* =================== MOVIE GRID & CARDS =================== */
@@ -129,11 +148,68 @@ body {
   text-align: center;
 }
 
+/* ================= MOVIE POSTER GRID ================= */
+.poster-image-container {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition:
+    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.3s ease;
+}
+
+.movie-poster-card:hover .poster-image-container {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(229, 9, 20, 0.3);
+}
+
+.poster-img {
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  width: 100%;
+}
+
+.poster-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.movie-poster-card:hover .poster-overlay {
+  opacity: 1;
+}
+
+.movie-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.rating-badge {
+  font-size: 0.75rem;
+  backdrop-filter: blur(4px);
+}
+
 /* =================== MOVIE DETAIL PAGE =================== */
 .movie-details-poster {
   border: 3px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
   transform: translateY(-10px);
+}
+
+.movie-overview-text {
+  color: #1a202c !important; /* Deep black/slate for crisp contrast */
+  background-color: #ffffff; /* Clean white background card */
+  padding: 1.25rem;
+  border-radius: 8px;
+  font-family:
+    "Aptos",
+    "Segoe UI",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 
 .custom-scrollbar {
@@ -158,70 +234,96 @@ body {
   font-size: 0.75rem;
 }
 
-/* =================== NEWS SECTION =================== */
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  padding: 20px 0 40px 0;
+/* =================== HOLLYWOOD NEWS SECTION =================== */
+.news-page-container {
+  font-family:
+    "Aptos",
+    "Segoe UI",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif !important;
 }
 
+/* Featured Article Banner */
+.featured-news-card {
+  border: 2px solid #000000 !important; /* Solid black border */
+}
+
+.featured-news-img {
+  height: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.featured-news-card:hover .featured-news-img {
+  transform: scale(1.03);
+}
+
+.featured-news-title {
+  color: #ffffff !important;
+  font-family: "Aptos", "Segoe UI", sans-serif;
+  line-height: 1.25;
+}
+
+.featured-news-desc {
+  font-family: "Aptos", "Segoe UI", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.news-section-heading {
+  color: #1a202c !important;
+  font-family: "Aptos", "Segoe UI", sans-serif;
+  font-size: 1.5rem;
+}
+
+/* Grid Card Styles - Pure White Card with Dark Aptos Text & Solid Black Border */
 .news-card {
-  background: var(--bg-card) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 14px !important;
+  background: #ffffff !important;
+  border: 2px solid #000000 !important; /* Solid black border outline */
+  border-radius: 12px !important;
   overflow: hidden;
   transition:
-    transform 0.3s ease,
-    border-color 0.3s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .news-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2) !important;
+  border-color: #000000 !important;
+}
+
+.news-img-wrapper {
+  height: 200px;
 }
 
 .news-card-img {
-  height: 180px;
+  height: 100%;
+  width: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-.news-content {
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+.news-card:hover .news-card-img {
+  transform: scale(1.05);
 }
 
-.news-title {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.4;
-  margin-bottom: 10px;
+.news-card-title {
+  color: #1a202c !important; /* Pure dark text on white card */
+  font-family: "Aptos", "Segoe UI", sans-serif;
+  line-height: 1.35;
 }
 
-.news-description {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  flex-grow: 1;
-  margin-bottom: 16px;
-}
-
-.news-button {
-  background: var(--accent-red) !important;
-  border: none !important;
-  font-weight: 600 !important;
-  padding: 8px 16px !important;
-  border-radius: 8px !important;
-  transition: background 0.2s ease !important;
-}
-
-.news-button:hover {
-  background: #b90710 !important;
+.news-card-desc {
+  color: #4a5568 !important; /* Muted dark slate snippet text */
+  font-family: "Aptos", "Segoe UI", sans-serif;
+  font-size: 0.925rem;
+  line-height: 1.5;
 }
 
 /* =================== BLOG FORM & CARDS =================== */
@@ -251,7 +353,6 @@ body {
   max-width: 340px;
 }
 
-/* Base input styling with explicit transparent override on focus */
 .search-input {
   background-color: rgba(30, 38, 54, 0.95) !important;
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
@@ -266,32 +367,19 @@ body {
   color: #a0aec0 !important;
 }
 
-/* Clean search input focus - no outer red box or background changes */
 .search-input:focus {
-  background-color: rgba(
-    30,
-    38,
-    54,
-    0.95
-  ) !important; /* Retains dark background */
-  box-shadow: none !important; /* Kills the red halo box */
-  outline: none !important; /* Kills default browser outlines */
-  border-color: rgba(
-    255,
-    255,
-    255,
-    0.25
-  ) !important; /* Keeps subtle initial border */
+  background-color: rgba(30, 38, 54, 0.95) !important;
+  box-shadow: none !important; /* Kills red halo box */
+  outline: none !important; /* Kills browser default outline */
+  border-color: rgba(255, 255, 255, 0.25) !important;
 }
 
-/* Also ensure the search button icon container doesn't shift focus outline */
 .search-icon-bg:focus,
 .search-icon-bg:active {
   box-shadow: none !important;
   outline: none !important;
 }
 
-/* Force Magnifying Glass Icon to be High-Visibility Crimson */
 .search-icon-bg i,
 .search-icon-bg .fa-search {
   color: #e50914 !important;
@@ -300,7 +388,6 @@ body {
   visibility: visible !important;
 }
 
-/* Dropdown Overlay Results */
 .search-dropdown-results {
   position: absolute;
   top: 100%;
@@ -359,50 +446,6 @@ body {
   overflow: hidden;
 }
 
-/* ================= MOVIE POSTER GRID ================= */
-.poster-image-container {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  transition:
-    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
-    box-shadow 0.3s ease;
-}
-
-.movie-poster-card:hover .poster-image-container {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(229, 9, 20, 0.3);
-}
-
-.poster-img {
-  aspect-ratio: 2/3;
-  object-fit: cover;
-  width: 100%;
-}
-
-.poster-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
-
-.movie-poster-card:hover .poster-overlay {
-  opacity: 1;
-}
-
-.movie-card-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-.rating-badge {
-  font-size: 0.75rem;
-  backdrop-filter: blur(4px);
-}
-
 /* ================= GENRE FILTER BAR ================= */
 .genre-filter-bar {
   scrollbar-width: thin;
@@ -424,70 +467,22 @@ body {
   transition: all 0.2s ease-in-out;
 }
 
-/* Unselected Chips: Black Text on Light Grey Background */
 .btn-outline-secondary.genre-chip {
   border-color: rgba(255, 255, 255, 0.2) !important;
   color: #000000 !important; /* Pure black text for high readability */
   background-color: #e2e8f0 !important; /* Clean light-grey background */
 }
 
-/* Unselected Chips Hover State */
 .btn-outline-secondary.genre-chip:hover {
   border-color: #e50914 !important;
-  color: #ffffff !important; /* Transitions to white on crimson hover */
+  color: #ffffff !important;
   background-color: #e50914 !important;
 }
 
-/* Active / Selected Tab (Red Fill with White Text) */
 .btn-danger.genre-chip {
   background-color: #e50914 !important;
   border-color: #e50914 !important;
   color: #ffffff !important;
   font-weight: 700;
   box-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
-}
-
-/* ================= PAGE HEADER STYLING ================= */
-.page-header {
-  margin-top: 0.5rem !important; /* Minimizes top gap */
-  margin-bottom: 1.5rem !important; /* Tightens space before genre tabs */
-}
-
-.page-title {
-  color: #1a202c !important; /* Dark slate text so it pops on light/white backgrounds */
-  font-weight: 800;
-  font-size: 2.2rem;
-  letter-spacing: -0.5px;
-}
-
-.page-subtitle {
-  color: #4a5568 !important; /* Muted slate for clear subtext contrast */
-  font-size: 1rem;
-  font-weight: 500;
-  margin-top: 0.5rem;
-}
-
-/* Optional: If your body/background is dark, use light text instead */
-body.bg-dark .page-title,
-.dark-mode .page-title {
-  color: #ffffff !important;
-}
-
-body.bg-dark .page-subtitle,
-.dark-mode .page-subtitle {
-  color: #a0aec0 !important;
-}
-
-/* Movie Details Overview Text */
-.movie-overview-text {
-  color: #1a202c !important; /* Deep black/slate for crisp contrast */
-  background-color: #ffffff; /* Clean white background card */
-  padding: 1.25rem;
-  border-radius: 8px;
-  font-family:
-    "Aptos",
-    "Segoe UI",
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
 }
